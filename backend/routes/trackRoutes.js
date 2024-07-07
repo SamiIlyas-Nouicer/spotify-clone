@@ -6,13 +6,13 @@ const {
 	updateTrack,
 	deleteTrack,
 } = require("../controllers/trackController");
-
+const authMiddleware = require("../middleware/authMiddleware");
 const router = express.Router();
 
-router.post("/", createTrack);
-router.get("/", getTracks);
-router.get("/:id", getTrackById);
-router.put("/:id", updateTrack);
-router.delete("/:id", deleteTrack);
+router.post("/", authMiddleware, createTrack);
+router.get("/", authMiddleware, getTracks);
+router.get("/:id", authMiddleware, getTrackById);
+router.put("/:id", authMiddleware, updateTrack);
+router.delete("/:id", authMiddleware, deleteTrack);
 
 module.exports = router;

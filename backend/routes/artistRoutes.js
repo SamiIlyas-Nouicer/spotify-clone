@@ -6,13 +6,13 @@ const {
 	updateArtist,
 	deleteArtist,
 } = require("../controllers/artistController");
-
+const authMiddleware = require("../middleware/authMiddleware");
 const router = express.Router();
 
-router.post("/", createArtist);
-router.get("/", getArtists);
-router.get("/:id", getArtistById);
-router.put("/:id", updateArtist);
-router.delete("/:id", deleteArtist);
+router.post("/", authMiddleware, createArtist);
+router.get("/", authMiddleware, getArtists);
+router.get("/:id", authMiddleware, getArtistById);
+router.put("/:id", authMiddleware, updateArtist);
+router.delete("/:id", authMiddleware, deleteArtist);
 
 module.exports = router;
